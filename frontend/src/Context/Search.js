@@ -6,13 +6,16 @@ const SearchProvider = ({ children }) => {
     keyword: "",
     results: [],
   });
+  const [open, setOpen] = useState(false);
 
   return (
-    <SearchContext.Provider value={[auth, setAuth]}>
+    <SearchContext.Provider value={[auth, setAuth,open,setOpen]}>
       {children}
     </SearchContext.Provider>
   );
 };
+
+export{SearchContext}
 
 // custom hook
 const useSearch = () => useContext(SearchContext);

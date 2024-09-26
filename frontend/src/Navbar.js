@@ -29,7 +29,7 @@ function Navbar ({children}){
     return(
         <nav>
          <div className="logo">
-          BuyNow.com
+          Amazon.com
          </div>
         <ul className={show ? "showMenu" : ""}>
             

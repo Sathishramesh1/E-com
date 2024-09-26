@@ -1,4 +1,4 @@
-import {useState,useEffect} from "react"
+import React, {useState,useEffect} from "react"
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -7,13 +7,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
 import { API } from "../Global";
+import { SearchContext, useSearch } from "../Context/Search";
+import CustomizedDialogs from "./Dialog";
 
  function GetAllProducts(){
 
   const [data,setData] = useState("")
   const userId = localStorage.getItem("userId")
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  const [searchState, setSearchState, open, setOpen] = useSearch();
+const [selected,setSelected]=useState({});
   useEffect(()=>{
       getDatas()
   },[])
@@ -52,9 +55,17 @@ import { API } from "../Global";
         <div className="products-container">
            { data && data.map((ele,index)=>{
               return(
-    <Card sx={{ maxWidth: 360 }}>
+                <div key={index}
+                onClick={()=>{
+                  setSelected(ele);
+                  setOpen(true);
+                }}
+                >
+    <Card sx={{ maxWidth: 360 }}
+    
+    >
       <CardMedia
-        sx={{ height: 280 }}
+        sx={{ height: 250 ,objectFit:"contain"}}
         image={ele.productImage}
         title="green iguana"
       />
@@ -80,8 +91,10 @@ import { API } from "../Global";
         </Typography>
         </CardContent>
     </Card>
+    </div>
               )
            })}
+           <CustomizedDialogs data={selected}/>
         </div>
      )
  }
