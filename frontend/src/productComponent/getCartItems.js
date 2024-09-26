@@ -23,8 +23,8 @@ function GetCartItems(){
       const res = await value.json()
 
       const Qty = {};
-     
-      res.forEach((item) => {
+     console.log("checking for the res",res);
+      res?.forEach((item) => {
        
         Qty[item._id] = 1;
        

@@ -81,7 +81,11 @@ const [selected,setSelected]=useState({});
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={()=>addItems(ele._id)} disabled={ ele.quantity < 1 ? true : false}>Add to cart</Button>
+        <Button size="small" onClick={(e)=>{
+          e.stopPropagation(); 
+        addItems(ele._id)
+        }
+        } disabled={ ele.quantity < 1 ? true : false}>Add to cart</Button>
         <Button size="small" onClick={()=> navigate(`/single/${ele._id}`) }>view</Button>
        
       </CardActions>
